@@ -1,0 +1,5 @@
+name: XUIDChecker
+main: XUIDChecker\Main
+version: 1
+api: 3.9.8
+author: iDarkQ
