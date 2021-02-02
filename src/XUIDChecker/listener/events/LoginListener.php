@@ -14,7 +14,7 @@ class LoginListener implements Listener {
      * @ignoreCancelled true
      */
 
-    public function LoginCheckXUUID(PlayerLoginEvent $e) : void{
+    public function LoginCheckXUID(PlayerLoginEvent $e) : void{
 
         $player = $e->getPlayer();
 
@@ -23,9 +23,9 @@ class LoginListener implements Listener {
             return;
         }
 
-        if(UserManager::getUser($player->getName())->getUUID() !== $player->getXuid()) {
+        if(UserManager::getUser($player->getName())->getXUID() !== $player->getXuid()) {
             $e->setCancelled(true);
-            $player->close("", "§l§4XUUID ERROR§r§7!");
+            $player->close("", "§l§4XUID ERROR§r§7!");
         }
     }
 }
