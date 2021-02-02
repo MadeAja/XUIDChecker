@@ -33,16 +33,15 @@ class UserManager {
                 Main::getUsers()->query("INSERT INTO 'users' (nick, uuid) VALUES ('$name', '$uuid')");
         }
     }
-
+    
     public static function loadAllUsers() : void {
         $db = Main::getUsers()->query("SELECT * FROM 'users'");
 
         $users = [];
 
-        while($row = $db->fetchArray()) {
-            if(is_string($row["nick"]) && is_string($row["uuid"]))
-                $users[$row["nick"]] = new User($row["nick"], $row["uuid"]);
-        }
+        while($row = $db->fetchArray(SQLITE3_ASSOC))
+            $users[$row["nick"]] = new User($row["nick"], $row["uuid"]);
+
         self::$users = $users;
     }
 }
