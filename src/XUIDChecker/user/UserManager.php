@@ -10,7 +10,8 @@ class UserManager {
     private static array $users = [];
 
     public static function init() : void {
-        Main::getUsers()->query("CREATE TABLE IF NOT EXISTS 'users' (nick TEXT, uuid TEXT)");
+        Main::getUsers()->query("CREATE TABLE IF NOT EXISTS 'users' (nick TEXT, xuid TEXT)");
+        self::loadAllUsers();
     }
 
     public static function createUser(Player $user) : void {
@@ -28,19 +29,19 @@ class UserManager {
     public static function saveAllUsers() : void {
         foreach(self::$users as $row => $value) {
             $name = $value->getName();
-            $uuid = $value->getUUID();
+            $xuid = $value->getXUID();
             if(empty(Main::getUsers()->query("SELECT * FROM 'users' WHERE nick = '$name'")->fetchArray()))
-                Main::getUsers()->query("INSERT INTO 'users' (nick, uuid) VALUES ('$name', '$uuid')");
+                Main::getUsers()->query("INSERT INTO 'users' (nick, xuid) VALUES ('$name', '$xuid')");
         }
     }
-    
+
     public static function loadAllUsers() : void {
         $db = Main::getUsers()->query("SELECT * FROM 'users'");
 
         $users = [];
 
         while($row = $db->fetchArray(SQLITE3_ASSOC))
-            $users[$row["nick"]] = new User($row["nick"], $row["uuid"]);
+            $users[$row["nick"]] = new User($row["nick"], $row["xuid"]);
 
         self::$users = $users;
     }
