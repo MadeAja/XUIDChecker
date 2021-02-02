@@ -18,7 +18,6 @@ class Main extends PluginBase{
 
         ListenerManager::init();
         UserManager::init();
-        UserManager::loadAllUsers();
     }
 
     public function onDisable() : void{
