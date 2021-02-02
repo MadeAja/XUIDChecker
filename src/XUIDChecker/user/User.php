@@ -5,15 +5,15 @@ namespace XUIDChecker\user;
 class User {
 
     private string $name;
-    private string $uuid;
+    private string $xuid;
 
-    public function __construct(string $name, string $uuid) {
+    public function __construct(string $name, string $xuid) {
         $this->name = $name;
-        $this->uuid = $uuid;
+        $this->xuid = $xuid;
     }
 
-    public function getUUID() : string {
-        return $this->uuid;
+    public function getXUID() : string {
+        return $this->xuid;
     }
 
     public function getName() : string {
